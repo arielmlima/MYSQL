@@ -1,0 +1,165 @@
+AULA 06 BANCO DE DADOS
+CURSOEMVIDEO
+
+Vamos aprender agora o ALTER TABLE e a primeira coisa que vamos fazer com ele é criar uma coluna.
+
+Os campos no MYSQL se referem as colunas.
+
+Antes vamos ver nossa tabela com o describe ou desc (os dois funcionam):
+
+describe pessoas;
+ou
+desc pessoas;
+
+E vamos adicionar a nossa tabela uma nova coluna: ADD COLUMN, e antes o ALTER TABLE.
+
+desc pessoas;
+
+alter table pessoas
+add column profissao varchar(10);
+
+Um comandinho pequeno ja acrescentou um campo na sua tabela.
+
+E oque aconteceu com a profissão das pessoas cadastradas?
+
+select * from pessoas;    //Para ver nossa tabela pessoas.
+
+Todos estão com profissão, mas com none no valor.
+
+Mais para frente aprenderemos a modificar adicionando dados nos registros.
+E sem ter que apagar esses registros e colocar tudo denovo, a gente vai colocar a profissão de cada pessoa.
+
+Note que toda vez que adicionamos uma coluna nova ela vai parar no final, virando a ultima coluna, o ultimo canto.
+
+Tambem podemos mudar ela de posição, mas para isso temos que remover ela antes.
+
+Para remover uma coluna: DROP COLUMN; E usando o ALTER TABLE antes pois estamos fazendo alterações na nossa tabela.
+
+Exemplo:
+
+alter table pessoas
+drop column profissao;
+
+E para escolhe a posição da coluna criamos ela denovo assim: AFTER nome (Depois do nome vai adicionar a profissão, não existe o before, se for pra ser o primeiro você põe FIRST, e se for o ultimo não precisa botar nada como vimos é o padrão.
+
+alter table pessoas
+add column profissao varchar(10) after nome;
+
+alter table pessoas
+add column profissao varchar(10) first nome;
+
+E tambem podemos escrever sem o column se quiser simplificar mais:
+
+alter table pessoas
+add profissao varchar(10) first nome;
+
+
+Modificando Definições:
+E se a gente quiser aumentar de 10 para 20 letrinhas em uma tabela:
+
+Usaremos o MODIFY COLUMN:
+
+Exemplo:
+
+alter table pessoas
+modify column profissao varchar(20);
+
+Você pode definir o tipo primitivo do campo e as constraints, mas não pode redefinir o nome. Se você quer renomear não da para usar o modify é outro comando.
+E outra coisa: Se você definir como not null, ele vai dar erro, precisaria de um default vazio, pois estaria todos vazios anteriormente.
+
+Exemplo:
+
+alter table pessoas
+modify column profissao varchar(20) not null default '';
+
+Para renomear uma coluna: CHANGE 
+
+Meio chatinho porque tem que colocar o nome velho e o novo. Se for mudar o nome vai ser por aqui.
+
+alter table pessoas
+change column profissao prof varchar(20);
+
+Se em vez da coluna eu quiser renomear o nome da tabela: RENAME TO
+
+alter table pessoas
+rename to gafanhotos;
+
+desc gafanhotos;    //Para conferir
+
+
+Da para fazer mais algumas coisas com alter table mas para isso vamos criar uma tabela nova:
+
+
+#IF NOT EXIST: SÓ VAI CRIAR ou APAGAR UMA TABELA ou BANCO DE DADOS SE ELE NÃO EXISTIR.
+Nesse caso estamos criando uma tabela nova pois não existe nenhuma tabela chamada cursos:
+
+Exemplo:
+
+create table if not exists cursos (
+nome varchar(30) not null unique,      //unique: Não é igual ao primary key mas parecido, não serve de identificador, apenas não deixa botar um valor repetido, não existem cadastrar dois cursos do mesmo na instituição.
+descricao text,
+carga int unsigned,                    //unsigned: Não vamos aceitar valores negativos na carga horaria. Economizando bytes. 
+totaulas int unsigned,
+ano year default '2024'                //Vai botar o ano 2024 por padrão se não for cadastrado o ano no curso. 
+) default charset = utf8;
+
+
+//Vai dar erro se essa tabela ja existir, não vai deixar criar uma nova por cima.
+
+#ADICIONANDO NOVO CAMPO 
+alter table cursos
+add column idcurso int first;
+
+#ADICIONAR A CHAVE PRIMARIA A ESSE CAMPO QUE CRIAMOS 
+alter table cursos
+add primary key (idcurso);
+
+#APAGAR A TABELA COMPLETA: DROP TABLE NOMEDATABELA;
+
+drop table cursos;
+
+Note que para apagar a tabela é: 
+
+drop table cursos;
+
+E para apagar a coluna ela é um parametro de alter table: 
+
+alter table drop
+drop column idcurso;
+
+Criar novo exercicio teste para não apagar nossa tabela bonitinha:
+
+Código:
+
+
+#CRIANDO TABELA TESTE SE ELA NÃO EXISTIR
+create table if not exists teste(
+id int,
+nome varchar(10),
+idade int
+);
+
+insert into teste value
+('1', 'Pedro', '22'),
+('2', 'Maria', '12'),
+('3', 'Maricota', '77');
+
+select * from teste;
+
+#DELETANDO TABELA TESTE SE ELA EXISTIR
+drop table if exists teste;
+
+MUITO CUIDADO AO MECHER EM UM BANCO DE DADOS ATIVO, MECHE NA COPIA DELE, AO DELETAR ALGO VOCÊ DELETA PARA SEMPRE NÃO TEM CONTROL-Z QNDO DELETA UMA TABELA, UM BANCO.
+
+Os dois comandos que vimos hoje tambem são DDL: ALTER TABLE / DROP TABLE
+ 
+DDL: DATA DEFINITION LANGUAGE: 
+CREATE DATABASE
+CREATE TABLE
+ALTER TABLE (Alteramos as tabelas e não os dados, logo estrutura tambem, voltado a definição.)
+DROP TABLE (Não apagamos os dados, apagamos a estrutura)
+
+DML: DATA MANIPULATION LANGUAGE
+
+INSERT INTO
+

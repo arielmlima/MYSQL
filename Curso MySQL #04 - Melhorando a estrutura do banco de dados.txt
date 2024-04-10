@@ -30,7 +30,7 @@ Lembra no HTML da incompatibilidade com os caracteres latinos? o UTF-8 vamos pre
 
  Abre o wampserver, o MySQLworkbench e vamos trabalhar.
 
-Para apagar criamos um arquivo no primeiro icone, e digitamos: drop database nomedobancodedados;
+Para apagar criamos um arquivo no primeiro icone, e digitamos: drop database nomedobancodedados; E raiozinho com I, ou Control + Enter.
 
 Exemplo prático:
 
@@ -38,4 +38,85 @@ drop database cadastro;
 
 E agora o banco de dados cadastro não existe mais. 
 
-4.52
+Exemplo agora com UTF-8: 
+
+create database cadastro
+default character set utf8mb4
+default collate utf8mb4_general_ci;
+
+
+Agora aprimoramos ainda mais nosso banco.
+
+
+Agora vamos aprimorar ainda mais com outros conceitos. 
+
+Trocar float por decimal.
+Em vez de cadastrar idade, cadastrar o ano de nascimento.
+E no sexo vamos trabalhar com uma coleção e nao com caracter simples.
+
+Vamos aprimorar:
+
+
+create database cadastro
+default character set utf8mb4
+default collate utf8mb4_general_ci;
+
+use cadastro;
+create table pessoas(
+nome varchar(30) not null,                    //not null torna o campo preenchimento obrigatório.
+nascimento date,
+sexo enum ('M','F'),                          //enum serve como uma coleção, e você o usuário so vai poder digitar/escolher M ou F.
+peso decimal(5,2),                            //quando escolhemos decimal o parenteses funciona assim: temos o numero total de casas e oque vem depois é quantas casas tem depois da virgula. () () (), () ()
+altura decimal(3,2),                          // () , ()  ()
+nacionalidade varchar(20) default 'Brasil'    //default serve para caso ninguem digitar nada por padrão é Brasil.
+)default charset = utf8;
+
+//Note que as constantes ficam em azul no código.
+
+//Se você ver os campos com crase não estranhe, não é a forma mais recomendada mas esta correta, e assim consigo utilizar campos com acentos e campos com espaços. Não confunda aspas simples, com crase e nem acento agudo.
+
+//Todo caractere em SQL em aspas simples, e toda palavra de definição entre crases. (Acho que não ta funcionando mais as crases).
+
+Exemplo:
+
+create database cadastro
+default character set utf8mb4
+default collate utf8mb4_general_ci;
+
+use cadastro;
+create table `pessoas` (
+`nome` varchar(30) not null,
+`nascimento` date,
+`sexo` enum ('M','F'),
+`peso` decimal(5,2),
+`altura` decimal(3,2),
+`nacionalidade` varchar(20) default 'Brasil'
+)default charset = utf8mb4;
+
+
+Note que com essa estrutura que criamos podemos ter mais de uma pessoa com o mesmo nome. E ai temos que estabelecer na tabela em pelo menos um dos campos, um campo que chamamos de chave primária - ele não se repete, que será como um código único daquela pessoa.
+Exemplo: CPF,RG,Matricula da faculdade, não se repetem.
+
+Em uma chave primaria não existe o registro do mesmo valor, vamos adicionar ao código:
+
+Exemplo:
+
+
+create database cadastro
+default character set utf8mb4
+default collate utf8mb4_general_ci;
+
+use cadastro;
+create table pessoas (
+id int not null auto_increment      //Declaramos id como inteiro, campo obrigatório não aceita valores nulos, e o auto_increment: A primeira pessoa cadastrada código 1, a segunda código 2, a terceira código 3, e assim sucessivamente e automaticamente.
+nome varchar(30) not null,
+nascimento date,
+sexo enum ('M','F'),
+peso decimal(5,2),
+altura decimal(3,2),
+nacionalidade varchar(20) default 'Brasil',
+primary key (id)                    //Para definir o id como chave primaria, vamos na ultima depois de nacionalidade e digitamos: primary key (id)
+)default charset = utf8mb4;
+
+
+Importantissimo o conceito de chave primaria, para não haver repetições de tuplas dentro de uma mesma tabela.

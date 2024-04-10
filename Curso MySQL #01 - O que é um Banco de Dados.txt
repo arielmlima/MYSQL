@@ -1,0 +1,96 @@
+Curso MySQL #01 - O que é um Banco de Dados?
+
+Como guardavamos dados até a decada de 50? Papel.
+
+Faça essa ligação, e lembra disso:
+
+REGISTROS  - PAPEL
+TABELAS    - PASTAS
+ARQUIVOS   - ARMÁRIO
+
+
+Para o acesso aos arquivos existe o ACESSO SEQUENCIAL e o ACESSO DIRETO.
+
+Sequencial: Vai contando do primeiro até chegar ao correto, sequencialmente.
+
+Direto: Vai direto no indice numerado, muito mais rápido.
+
+O banco de dados surge após reunião da CODASYL. 
+
+BANCO DE DADOS: Surge em 1960.
+
+É composto por quatro partes:
+
+Base de dados - Que são os dados propriamente ditos,  a estrutura de todo banco de dados.
+Sistema gerenciador - SGBD  OU DMS em inglês, alem dos dados um banco de dados tem que ter um sistema gerenciador. Um sistema que gerencie esses dados.
+Linguagem de exploração - Você não precisa aprender várias linguagens, apenas uma unica linguagem de acesso ao dado, que seria uma linguagem de exploração.
+Programas adicionas - Gerencia de usuários, otimizadores de dados... Tudo que tiver extra.
+
+EVOLUÇÃO DOS MODELOS.
+
+1 MODELO HIERARQUICO - MODELO 1:
+
+IBM propos a criação de dados hierarquicos, seriam dados interligados, que seriam armazenados seguindo uma hierarquia.
+
+
+2 MODELO EM REDE - MODELO 2:
+
+Nesse não teriamos dados quem é superior quem é inferior, eles seriam ligados em uma forma de rede inteligente, isso trouxe o modelo em rede. 
+Podia guardar dados de clientes, fornecedores, serviços, funcionários, empresas.
+ Mas não facilitavam uma coisa simples, o relacionamento, os dados terem relação entre eles, onde conseguimos interagir diferentes dados, de diferentes lugares. 
+
+3 MODELO RELACIONAL - MODELO 3:  
+Esse é oque vamos usar, surge em 1970. Nesse novo modelo, em vez de hierarquias ou ligações de rede, eles teriam ligações mais intrisecas, eles teriam relação!
+
+Os mais recentes são: 
+
+MODELO 4: MODELO RELACIONADO A DOCUMENTO 
+
+MODELO 5: MODELO RELACIONADO A OBJETO
+
+Porem vamos começar pelo relacional que é muito mais simples de entender para depois avançar.
+
+Exemplo: MODELO RELACIONAL 
+
+Permite coisas do tipo: Se eu tenho um banco de dados, e eu tenho cadastro de algum cliente, pego essa fixa guardo no meu banco de dados, daqui eu posso ter acesso a todos os dados do meu cliente.
+So que isso acima qualquer modelo faz, o diferencial do relacional seria por exemplo:
+
+ Identificar onde ele mora, e quais foram as compras que ele fez, apartir dessas compras, 
+posso ter acesso a data que foi feita, e qual foi a influencia que ela teve no meu estoque, 
+e se por acaso esse estoque fica baixo, eu posso ter acesso diretamente ao meu fornecedor. 
+
+Viu como é valioso esse novo modelo? 
+
+A partir de um dado armazenado consigo caminhar por eles, contanto que eles tenham relação entre si, e eu como construtor do banco de dados especifique essas relações.
+
+
+Espeficar como? Com uma linguagem exploração, vamos usar MySQL - Structured Query Language
+
+É uma linguagem de consulta, onde podemos dar comandos, dar instruções ao meio ambiente do banco de dados, e ai ele vai ter retornar uma Query(Uma resposta a solicitação).
+
+ A ideia inicial é que a linguagem SQL fosse universal, sendo uma unica linguagem SQL, onde todos os bancos de dados suportariam comandos nessa linguagem.
+
+O problema é que cada fabricante cada um deu sua incrementada e criou sua prorpia SQL, e assim surgindo vários SQL tornando o mercado confuso, porque tinhamos várias linguagens, gerando despadronização.
+
+E ai vieram os orgãos de padronização e resolveram a bagunça. (ANSI E ISO)
+
+AnsiSQL = SQL padronizado universalmente
+
+Soluções pagas de bancos de dados, soluções empresariais:
+A partir disso surgiu o ORACLE: um dos maiores bancos de dados do mercado hoje.
+O da IBM D2
+DBASE que não se usa mais.
+Microsoft SQLServer.
+
+
+E os gratuitos?
+
+MySQL que vamos trabalhar com ele, ele é da Oracle.
+
+Tem o MariaDB tambem.
+Firebird
+PostgreSQL 
+
+
+  
+

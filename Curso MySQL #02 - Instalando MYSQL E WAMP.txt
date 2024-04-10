@@ -1,0 +1,65 @@
+AULA 2 - BANCO DE DADOS MYSQL
+
+Como surgiu o projeto do SQL?
+
+1994 na Suécia, um projeto de dois programadores Michael Widenius e David Axmark, voltado a um modelo relacional para ser GRATUITO, compativel com SQL, é código aberto(OpenSource) ou livre(GPL: Licença de software livre).
+
+A partir de 2007 foi compranda pela sun, e oracle comprou a sun em 2009.
+
+A oracle é dona do Mysql, e Michael não satisfeito saiu fora e criou o MariaDB.
+
+Empresas que usam MYSQL:
+
+Nasa
+Google
+Adobe
+Cisco
+Ebay
+Operadoras
+Bradesco
+Forças Armadas
+HostNet
+
+
+Por definição o MYSQL possui dentro dele algumas instruções que se caracterizam como linguagens do tipo, por exemplo:
+
+DDL: Que é uma linguagem de definição. Na linguagem DDL, podemos criar um banco de dados, uma tabela, alterar esse banco de dados. Qualquer comando de definição da estrutura da base de dados é mantida dentro do MYSQL pela porção DDL.
+
+DML: Que é de manipulação. Podendo incluir novos dados, excluir, manipular de qualquer maneira, alterar a composição deles.
+
+ //Definição define a estrutura e a manipulação manipula os dados.
+
+DQL: Que é de solicitações. Podendo fazer um select, faz parte da porção DQL do mysql, então qualquer solicitação que voce vai precisar o DQL vai te atender.
+
+DCL: De controle. Definir que usuarios podem acessar seu banco, qual tipo de acesso ele vai poder fazer, que tipo de comandos ele vai poder executar. 
+
+DTL: De transações. Qualquer solicitação que pode ser feita a um banco de dados te atendendo da melhor maneira possivel, usando o principio que a gente chamada de DICA:
+
+Sendo as caracteristicas de uma boa transação:
+ //DICA: Durabilidade: Todo dado que é colocado, alterado ou manipulado tem que permanenecer duravel, enquanto eu quiser que ele esteja la. 
+         Isolamento: Se eu tenho duas transações sendo feitas ao mesmo tempo tenho que fazer as duas uma sem interferir na outra, elas tem que ser isoladas.
+         Consistência: Toda transação tem que levar o banco de dados de um estado consistente para outro consistente, se tudo estava ok antes tem que estar ok depois.
+         Atomicidade: Toda transação tem que ser atomica, ou todla ela acontece ou nada acontece. Ou tudo funciona ou ele da um control-z, sendo o retorno para o dado anteriormente consistente.
+
+
+O MYSQL é compativel com tudo isso que falamos. 
+
+Para rodar tem que ter um servidor em casa? é mais ou menos por ai...
+
+Para rodar vamos usar: 
+
+MYSQL 
+
+MYSQLWORKBENCH (Onde não vamos precisar um terminal e sim essa interface voltada a isso, bem mais amigavel). Ele não é o MySQL ele é uma ferramente para acessar.
+
+WAMPSERVER (PACOTE QUE VAI UNIR PHP E MYSQL NOS ATENDENDO MUITO MELHOR MAIS PARA FRENTE)
+
+
+
+  Após instalações: Note que podemos fazer via terminal no WampServer a mesam coisa que vamos fazer no MYSQL Workbench, mas la é muito melhor de se fazer, muito mais amigavel. 
+  
+  Podemos fazer as coisas com apenas cliques, ou linhas de comandos, facilitando muito.
+
+  Note que quando abrimos o wamp e abrindo a parte sql.run, status para ver se tava rodando, e ao abrir o WorkBench ja tinha la nosso servidor criado.
+
+  

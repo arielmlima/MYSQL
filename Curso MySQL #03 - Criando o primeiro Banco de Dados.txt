@@ -1,0 +1,264 @@
+AULA 03 - BANCO DE DADOS
+CURSO EM VIDEO
+
+
+ESSE CURSO É VOLTADO PARA INICIANTES, VOLTADO PARA MYSQL NA LINGUAGEM MYSQL NAS INSTRUÇÕES SQL, VAMOS DAR UMA PASSADINHA EM MODELO RELACIONAL, MAS NAO VAMOS APROFUNDAR, NÃO É NOSSO FOCO .
+
+Estrutura do banco de dados para revisar vamos ver outro exemplo:
+
+Temos personagens:   GODOFREDO
+                     DOLORES   
+                     GODOLORES
+
+Cada um deles tem uma ficha igual, preenchida diferentemente com seus proprios dados:
+
+Note que essas caracteristicas são semelhantes a todos, todos eles tem essas caracteristicas:
+
+Nome:
+Idade:
+Sexo:
+Peso:
+Altura:
+Nacionalidade:
+
+E cada um dos personagens tem seu proprio nome, peso, sexo, nacionalidade...
+E isso os faz instancias, e isso os faz pessoas umas das outras.
+
+ESSE É O OBJETIVO DO BANCO DE DADOS, REGISTRAR INSTANCIAS SEPARADAS DE COISAS QUE TEM CARACTERISTICAS SEMELHANTES.
+
+Usando esse padrão posso cadastrar qualquer tipo de pessoa, porque qualquer uma vai ter as mesmas caracteristicas.
+
+ Mesmas Caracteristicas e não mesmos Valores, não confundir.  
+
+ Então podemos pegar essas pessoas colocar todas em um container, e escrever do lado de fora do container PESSOAS.
+
+ Todas as vezes que eu tiver uma pessoa e eu quiser guardar ela, vai ser nesse container, e todas as instancias vão ter as mesmas caracteristicas, algumas podem ser opcionais por exemplo: Nacionalidade que eu não precise a de todo mundo obrigatoriamente, mas existe a possibilidade de cadastro da nacionalidade.
+
+ Posso criar containers diferentes para coisas diferentes, vamos criar um para jogos:
+
+  Pessoas e jogos tem caracteristicas diferentes, então vai para outro container chamado JOGOS.
+  
+
+Coisas com caracteristicas semelhantes estão no mesmo container. Separar coisas com caracteristicas difentes e vamos agrupar entre elas.
+ 
+PEGAMOS ESSES DOIS CONTAINERS: PESSOAS E JOGOS E JOGAMOS EM UM NAVIO.
+
+
+No BANCO DE DADOS tudo isso tem nome: 
+
+Banco de dados: Vai ser o meu navio, Coleções de dados de caracteristicas separadas mas que estão organizados em locais especificos.
+
+Tabelas:  Esses locais especificos acima são minhas tabelas, tabelas guardam dados de coisas que tem caracteristicas semelhantes. E podemos ter várias.
+
+Registros: DADOS QUE ESTÃO DENTRO DAS TABELAS.
+
+RESUMINDO: BANCO DE DADOS SÃO UM CONJUNTO DE TABELAS E TABELAS SÃO UM CONJUNTO DE REGISTROS.
+
+Para criar um banco de dados é muito simples: Vamos ter que digitar: CREATE DATABASE nomedobancodedados; Tudo minúsculo.
+
+Ex nome do banco de dados vai ser cadastro:
+
+create database cadastro;
+
+Onde digitar isso? 
+
+Vamos abrir o wamp, espera ficar verde. Abre o WorkBench no cantinho direito vamos esconder as abas. Vamos ficar somente com as Querys, somente com as minhas consultas aqui.
+
+Na aba lateral esquerda vimos os schemas se oque criamos esta funcionando.
+
+No raio com um I vamos executar depois de escrever.
+
+Para verificar se abriu certinho abrimos a parte de baixo da aba, Output, onde vai ter um sinal de verificado e 1 row(s) affected.
+ 
+O conceito de linhas afetadas vamos usar bastante. Quando eu criei um banco, eu afetei uma linha, isso é eu tenho um banco de dados novo.
+
+Atualiza a aba schemas e vai aparecer nosso banco de dados, com tabelas e tudo mais.
+
+Para partir para tabelas vamos voltar ao nosso container PESSOAS: 
+Nosso container tem caracteristicas padronizadas para todos eles,
+ Vamos pegar pessoas e todas vão ter caracteristica: nome, idade, sexo, peso, altura, nacionalidade. 
+ Essas caracteristicas são chamadas de CAMPOS.
+
+
+BANCO DE DADOS CONTEM TABELAS, TABELAS CONTEM REGISTROS, REGISTROS SAO COMPOSTOS POR CAMPOS.
+
+PARA CRIAR UMA TABELA É BEM SIMPLES TAMBEM: CREATE TABLE nomedatabela (campos);
+
+Ex prático:
+
+create table pessoas ( )
+
+Ex prático 2: Separa tudo por virgulas, o ultimo não precisa. E temos que declarar o tipo desses dados.
+
+create table pessoas(
+nome,
+idade,
+sexo,
+peso,
+altura,
+nacionalidade
+);
+------------------------------
+TIPOS PRIMITIVOS MYSQL:
+
+Numérico: Inteiro, Real e lógico.
+data e tempo: 
+literais: Caracteres, textos, binários e coleções.
+espaciais: trata dados volumetricos, não abordaremos aqui, se você quer cadastrar algo volumetrico que precise, pesquisa mais sobre a familia espacial.
+
+E cada um desses tipos tem  precisões diferentes e a diferença desses tipos ta na quantidade de bites que ele vai utilizar para armazenar esses dados.
+
+Números:
+Inteiros (INT, INTEGER): Representa números inteiros, positivos ou negativos, sem casas decimais.
+Números de ponto flutuante (FLOAT, DOUBLE): Representa números com casas decimais.
+
+Texto:
+Caractere (CHAR, CHARACTER): Armazena uma sequência fixa de caracteres.
+Varchar (VARCHAR, VARIABLE CHARACTER): Armazena uma sequência variável de caracteres.
+Texto (TEXT): Usado para armazenar grandes quantidades de texto.
+
+Datas e Horas:
+Data (DATE): Armazena datas (ano, mês e dia).
+Hora (TIME): Armazena horários do dia.
+Data e Hora (DATETIME, TIMESTAMP): Armazena data e horário juntos.
+
+Booleano:
+Booleano (BOOL, BOOLEAN): Armazena valores verdadeiro (TRUE) ou falso (FALSE).
+Imagens e Arquivos:
+Blob (BINARY LARGE OBJECT): Usado para armazenar dados binários, como imagens, áudio ou outros tipos de arquivos.
+Outros Tipos Especiais:
+
+Enumeração (ENUM): Define um conjunto de valores possíveis.
+
+Conjunto (SET): Similar a ENUM, mas pode armazenar múltiplos valores selecionados.
+Tipos Geoespaciais (para Sistemas de Informações Geográficas):
+Pontos, linhas, polígonos, etc., utilizados para representar informações geográficas.
+
+Tipos Personalizados:
+Em alguns sistemas de banco de dados, você pode criar tipos de dados personalizados.
+Lembrando que a disponibilidade de tipos de dados pode variar entre os diferentes sistemas de gerenciamento de banco de dados (SGBDs), como MySQL, PostgreSQL, Oracle, SQL Server, entre outros. Cada SGBD pode ter sua própria implementação e nomenclatura para esses tipos de dados.
+
+O que são tipos primitivos MySQL?
+No contexto do MySQL, os “tipos primitivos” referem-se aos tipos de dados básicos e fundamentais fornecidos pelo próprio sistema de gerenciamento de banco de dados. Dessa forma, esses tipos de dados são usados para representar os valores mais simples que podem ser armazenados nas colunas de uma tabela do MySQL.
+
+Veja alguns exemplos dos tipos de dados primitivos do MySQL:
+
+Tipos numéricos inteiros:
+TINYINT
+SMALLINT
+MEDIUMINT
+INT
+BIGINT
+
+Tipos numéricos de ponto flutuante:
+FLOAT
+DOUBLE
+
+Tipo lógico: - true or false
+BIT
+BOOLEAN
+
+Tipos de data e hora:
+DATE - DATA COMPLETA
+TIME - HORA
+DATETIME - DATA E HORA
+TIMESTAMP - DATA E HORA COM INFORMAÇÕES A MAIS
+YEAR - ANO
+
+Tipos de CARACTERE:
+CHAR   - Dado é FIXO, se eu mandar armazenar o nome zé com 30 letras vai ter duas letras guardadas e o resto todo preenchido com espaço, pois ditamos que no disco vai ter 30 espaços FIXOS.
+VARCHAR - Dado é VARIANTE, Aqui é diferente seu nome vai ter até 30 letras, se seu nome for Zé vai ocupar so dois espaços, deixando os outros espaços disponiveis. Maioria das vezes vamos usar VARCHAR.
+
+Outros tipos de dados:
+BINARY
+VARBINARY
+BLOB - PERMITE GUARDAR QUALQUER COISA EM BINARIO, TIPO UMA IMAGEM, APESAR DE NAO RECOMENDADO
+TEXT - TEXTOS GRANDES 
+ENUM  
+    : São tipos onde voce pode configurar quais sao os valores permitidos, na hora do cadastro so vai aceitar esses valores.
+SET
+
+Eles constituem a base para construir estruturas mais complexas e você pode combiná-los com restrições, como chaves primárias e chaves estrangeiras, para assegurar a integridade e consistência dos dados em um banco de dados relacional. 
+-----------------------------------------------
+https://image.slidesharecdn.com/03-criandobancodedadosmysql-160306120736/85/curso-mysql-03-criando-um-banco-de-dados-mysql-14-320.jpg?cb=1666658715
+
+Acima uma imagem ilustrando o mesmo slide do video com varias precisões diferentes e tipos.
+O TinyInt usa muito menos dados do que o BigInt por exemplo. Um vai usar muitos bites em um disco outro vai usar pouquinho.
+
+Artigo adicional muito util com as precisões tipos: https://horadecodar.com.br/tipos-primitivos-mysql/
+
+Influenciando diretamente no tamanho do numero que voce vai guardar, Por exemplo idade, você não precisa do Int inteiro você usa o TinyInt que utiliza apenas 3 bytes na memória.
+NÃO SE SALVA IDADE NO BANCO DE DADOS POIS IDADE MUDA CONSTANTEMENTE, MAS ESTAMOS NO PASSO A PASSO.
+
+O simbolo de ponto e virgula indica o fim do comando, se temos 8 linhas e um ponto e virgula so temos um comando.
+
+Como ficou nosso exercicio:
+
+create table pessoas(
+nome varchar(30),
+idade tinyint(3),
+sexo char(1),
+peso float,
+altura float,
+nacionalidade varchar(20)
+);
+
+Para criar/rodar, vamos por antes um:
+
+use cadastro;
+
+
+Vai ficar assim, tambem temos que clicar duas vezes no cadastro no schemas a esquerda, para ficar em negrito e funcionar.
+
+use cadastro;
+create table pessoas(
+nome varchar(30),
+idade tinyint(3),
+sexo char(1),
+peso float,
+altura float,
+nacionalidade varchar(20)
+);
+
+E agora na parte de tabelas, ja criamos a tabela: pessoas.
+
+E para ver a estrutura? vamos usar o describe pessoas;
+
+use cadastro;
+create table pessoas(
+nome varchar(30),
+idade tinyint(3),
+sexo char(1),
+peso float,
+altura float,
+nacionalidade varchar(20)
+);
+
+describe pessoas;
+
+
+Esse comando vai abrir toda a estrutura da nossa tabela.
+
+
+
+E agora vamos ver que da para fazer o mesmo no terminal acessando os mesmos locais:
+
+show databases;  - mostra os bancos de dados criados
+
+use cadastro;  - usar o banco de dados cadastro
+
+status;  - qual banco de dados esta aberto no momento
+
+show tables; - mostrar quais sao as tabelas desse banco que escolhemos
+
+describe pessoas; - vai me descrever.
+
+exit; - sair
+
+
+Esse comandos que utilizaremos para programas em php por exemplo, então é bom entender esses códigos e não se confiar so nas funcionalidades do IDE.
+
+Aprender os comandos é muito importante.
+
+
+

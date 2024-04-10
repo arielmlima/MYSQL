@@ -1,0 +1,41 @@
+AULA 04 - BANCO DE DADOS MYSQL
+CURSO EM VIDEO
+
+Na aula passada vimos o exemplos do nosso amigo Godofredo, 32 anos, masculino, 78.5kg, 1.83m, Brasil.
+, ele tinha algumas caracteristicas como nome, idade, sexo, peso, altura, nacionalidade. Ai historia do container e navio.
+
+Essas caracteristicas, tambem compartilhadas por sua esposa dolores e sua filha Godolores, todos com as mesmas caracteristicas.
+
+Na aula passada aprendemos os comandos: 
+
+create database cadastro;             //Criar banco de dados
+
+create table pessoas(                 //Criar tabela
+nome varchar(30),
+idade tinyint(3),
+sexo char(1),
+peso float,
+altura float,
+nacionalidade varchar(20)
+);
+
+Vamos melhorar essas duas estruturas para forma mais profissional:
+
+Você sabe que o create database cria um banco de dados, mas da pra criar um bem melhor que esse aqui, vamos com paciencia. Da para criar um banco bem melhor, o banco de dados contem dados, palavras, nomes, numeros.
+Da para especificar que formatos esses dados vão ter diretamente do comando create database;
+
+Lembra no HTML da incompatibilidade com os caracteres latinos? o UTF-8 vamos precisar aqui tambem.
+
+ Para criar um banco de dados novo agora, vamos excluir o anterior.
+
+ Abre o wampserver, o MySQLworkbench e vamos trabalhar.
+
+Para apagar criamos um arquivo no primeiro icone, e digitamos: drop database nomedobancodedados;
+
+Exemplo prático:
+
+drop database cadastro;
+
+E agora o banco de dados cadastro não existe mais. 
+
+4.52

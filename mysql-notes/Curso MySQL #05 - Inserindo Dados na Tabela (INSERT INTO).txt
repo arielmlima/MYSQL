@@ -1,0 +1,99 @@
+CURSO EM VIDEO - BANCO DE DADOS 
+AULA 05
+
+Para inserir os dados na tabela como fazemos? É muito simples.
+
+Todo comando que faz parte da definição de estrutura de comandos do banco de dados, segue uma sigla.
+
+//O create table tambem é conhecido como um dos comandos DDL no SQL: Data Definition Language, ou linguagem de definição de dados.
+
+//create database e create table os dois são comandos DDL.
+
+
+Como vamos fazer para inserir?
+
+Vamos pegar todos os campos que temos e botar entre parenteses:
+
+ (id, nome, nascimento, sexo, peso, altura, nacionalidade)
+
+Na linha de baixo: Entre parenteses, e aspas simples, separados por virgula, cada um dos dados que vamos inserir, fecha parenteses e ponto e virgula.
+
+ ('1', 'Godofredo', '1984-01-02', 'M', '78.5', 'Brasil');
+
+
+//Data no SQL:       ano-mes-dia
+
+
+//Oque esta entre aspas é considerado como DADOS aqui, não strings.
+
+
+Código como seria em português:
+
+ INSIRA NA TABELA pessoas
+ (id, nome, nascimento, sexo, peso, altura, nacionalidade)
+ OS VALORES
+ ('1', 'Godofredo', '1984-01-02', 'M', '78.5', '1.83', 'Brasil');
+
+Código como é:
+ 
+ insert into pessoas
+ (id, nome, nascimento, sexo, peso, altura, nacionalidade)
+ values
+ ('1', 'Godofredo', '1984-01-02', 'M', '78.5', '1.83', 'Brasil');
+
+
+Os que tiverem auto implement não precisa por, e o codigo vai ficar assim: O próprio sistema vai decidir, não preciso me preocupar com o id.
+
+ insert into pessoas
+ (nome, nascimento, sexo, peso, altura,nacionalidade)
+ values
+ ('Godofredo', '1984-01-02', 'M', '78.5', '1.83', 'Brasil';
+
+
+Outro comando que vamos ver:
+
+select * from pessoas; //Selecione todos os dados de pessoas, e vai exibir oque preenchemos.
+
+Se preferir pode escrever id, e embaixo põe default.
+
+Código completo:
+
+ insert into pessoas
+ (id, nome, nascimento, sexo, peso, altura, nacionalidade)
+ values
+ (default, 'Godofredo', '1984-04-22', 'F', '52.5', '1.43', default);
+ 
+ select * from pessoas;
+
+
+E se a ordem que eu faço é a mesma da minha tabela definida no banco, então podemos simplificar ainda mais, e nem precisamos inserir os campos:
+
+
+Código:
+
+insert into pessoas values
+(default, 'Godofredo', '1984-04-22', 'F', '52.5', '1.43', default);
+ 
+ select * from pessoas; //Usa isso aqui so depois de adicionar dados, para apenas mostrar.
+
+E tambem conseguimos inserir varias pessoas apenas com um insert into só, não precisamos ficar repetindo isso. Em vez do ponto e virgula, virgula e abre o proximo parenteses com os proximos dados da outra pessoa.
+
+Código:
+
+ insert into pessoas
+ (id, nome, nascimento, sexo, peso, altura, nacionalidade)
+ values
+ (default, 'Godofredo', '1984-01-02', 'M', '78.5', '1.83', default),
+ (default, 'Godofrete', '1984-04-06', 'F', '99.5', '1.88', 'Portugal'),
+ (default, 'Creuza', '1944-05-30', 'F', '71.2', '1.44', 'Espanha');
+
+E para exibir:
+
+  select * from pessoas;
+
+
+Todos os dados foram adicionados com sucesso.
+
+
+ Observação: JA VIMOS QUE CREATE DATABASE, E CREATE TABLE SÃO DDL - DATA DEFINITION LANGUAGE
+ O insert into que usamos agora é da classificacao DML - DATA MANIPULATION LANGUAGE.

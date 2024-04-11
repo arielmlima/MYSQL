@@ -1,0 +1,94 @@
+AULA 07 BANCO DE DADOS 
+CURSO EM VIDEO
+
+Nessa aula vamos aprender a manipular registros, tambem conhecidos como linhas ou tuplas. São sinonimos, é uma linha da tabela.
+Os três abordam sobre a mesma coisa.
+
+Vamos ver nossas tabelas feitas até agora: 
+select * from gafanhotos;
+
+select * from cursos;
+
+Tudo que estiver em registro é linha, tudo que estiver em coluna é campo.
+
+
+Ja aprendemos a manipular colunas na aula passada, agora vamos aprender a manipular linhas, adicionando novos cursos.
+
+#INSERINDO LINHAS
+insert into cursos values
+('1', 'HTML4', 'Curso de HTML', '40', '37', '2014'),
+('2', 'Algoritmos', 'Lógica de Programação', '20', '15', '2014'),
+('3', 'Photoshop', 'Photoshop CC', '40', '20', '2014'),
+('4', 'PGP', 'PHP', '30', '15', '2000'),
+('5', 'Jarva', 'Java', '40', '30', '2010');
+
+
+#MODIFICANDO LINHA QUE ESCREVEMOS ERRADO ACIMA: UPDATE
+
+Um comando manipula uma linha, mas consigo mecher dentro de uma linha em varias colunas ao mesmo tempo, vamos aprender.
+
+Código:
+
+update cursos                        //Mudar o nome HTML4 para HTML5, e para isso nos baseamos na coluna de chave primaria para identificar/selecionar o correto.
+set nome = 'HTML5'
+where idcurso = '1';
+
+
+Em português:
+
+Atualize em cursos 
+configurando o nome para HTML5
+onde o idcurso é igual a 1;
+
+
+E com isso vou modificar a tabela cursos, modificando o conteudo da coluna nome para HTML5 onde o id seja 1.
+
+
+#VAMOS MODIFICAR A LINHA EM DUAS COLUNAS 
+update cursos
+set nome = 'PHP', ano = '2015'
+where idcurso = '4';
+
+
+#VAMOS MODIFICAR A LINHA: EM TRÊS COLUNAS
+update cursos
+set nome = 'Java', carga = '40', ano = '2015'
+where idcurso = '5'
+limit 1;                          //Serve para dizer que só vai modificar uma linha, é nossa garantia, mesmo com id que outras linhas não vão ser afetadas.
+
+
+#MODIFICAR MAIS DE UMA LINHA, USANDO TODAS AS LINHAS QUE FOREM DO ANO 2018 EM VEZ DA CHAVE PRIMARIA.
+update cursos
+set ano = '2050', carga = '800'
+where ano = '2018';
+
+//Tiramos o limit, pois queremos alterar as 3 linhas que estavam com ano 2018 e não só uma. Com o limit so vai funcionar para a primeira linha, ele é uma segurança.
+//Isso vai dar erro pois o workbench so permite que a gente mecha em uma linha por vez usando nossa chave primaria, para desabilitar isso: edit>preferences>sqleditor> desmarca o safeupdates.
+//Mas não é legal desabilitar isso, imagina o risco de modificar um banco de dados inteiro sem querer, vamos habilitar depois das aulas.
+//Então muito cuidado ao usar o update dessa forma em uma banco de dados ativo, é bom sempre ter um backup para isso e usar ele modo safe.
+
+#PARA APAGAR LINHA
+delete from cursos
+where idcurso = 8;
+
+#PARA APAGAR LINHAS
+delete from cursos 
+where ano ='2050'
+limit 2;
+
+#PARA APAGAR TODAS AS LINHAS DA TABELA
+truncate table cursos; 
+ou
+truncate cursos;
+
+Aqui não existe control + z, apartir do momento que voce digita tudo isso, voce tem certeza que quer apagar né.
+//Se eu quiser usar o limit 2; ele vai pegar apenas as 2 primeiras linhas. E tem que estar desmarcado o safe update tambem, e reconecta no botãozinho la em cima para dar certo.
+//Truncar significar apagar tudo. 
+
+Revisão: COMANDOS ATÉ AGORA:
+
+DDL: CREATE DATABASE, CREATE TABLE, ALTER TABLE, DROP TABLE.
+
+DML: INSET INTO, UPDATE, DELETE, TRUNCATE.
+
+Qual a diferença de truncate e drop table? O truncate vai deletar os registro mas a estrutura da tabela continua la, drop table vai deletar a tabela e os dados vão juntos.

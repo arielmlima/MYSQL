@@ -5,7 +5,7 @@ descricao text,
 carga int unsigned, 
 totaulas int unsigned,
 ano year default '2024'
-) default charset = utf8;
+) default charset = utf8mb4;
 
 #ADICIONANDO NOVO CAMPO 
 alter table cursos

@@ -1,0 +1,54 @@
+AULA 09 BANCO DE DADOS MYSQL
+CURSO EM VIDEO
+
+Vamos aprender usar outra ferramenta: PHPMyAdmin.
+
+E tambem vamos utilizar o console - aquela tela preta.
+
+As vezes os alunos podem confundir achando que o banco de dados esta guardado no workbench mas não é, você pode utilizar esse banco de dados porque ele esta em um servidor.
+
+Pro ambiente que criamos nessas aulas, o servidor esta na nossa maquina, mas você pode acessar remotamente qualquer servidor sql contanto que você tenha usuário, servidor e a senha.
+
+Vai no WAMP: MYSQL : MYSQLCONSOLE
+
+  
+  show databases; 
+
+  use cadastro;
+
+  show tables;
+
+  describe cursos;
+
+  desc gafanhotos;
+
+  select * from cursos;
+
+  select * from gafanhotos;
+ 
+  update cursos set nome = 'Ph' where idcurso = '4';
+
+Digita esses comandos e executando um seguidos do outro, e note que não é porque tem uma tela preta e branca que vai ser diferente, é a mesma coisa de usar o sqlworkbench, so que la tem uma interface mais amigavel.
+Se alguem manda voce acessar pelo terminal, tudo certo tambem, mas vamos continuar usando o workbench mesmo.
+
+Vê? Seu dado esta no servidor SQL, não esta no workbench, nem em um aplicativo especifico, independente da ferramenta que voce utilizar, podemos usar qualquer comando que vimos até agora.
+
+
+#PHPMYADMIN: Aplicação web com objetivo de facilitar e automatizar a criação no banco de dados no SQL.
+
+Abre o WAMP > PHPMYADMIN
+
+E por la podemos acessar nossos bancos e tabelas, e editar, e após a edição clica em executar.
+
+O PHPAdmin vai criar uma linha fazendo o update que você faria caso estivesse fazendo isso no terminal. 
+
+
+Vamos voltar ao console e ver se deu certo:
+
+select * from cursos;
+
+Tudo certinho, tudo atualizado. Entenda, aquilo que você faz em qualquer ferramenta repercute em todas as outras, porque na verdade não é a ferramenta que armazena os dados, a ferramenta apenas manipula os dados no servidor.
+Ah, prefiro workbench, prefiro phpmyadmin, prefiro o console: Independente da ferramenta que você utiliza, você vai conseguir manter os dados porque eles não estão dentro da ferramenta.
+E Para extrair os dados do servidor oque vamos fazer? Gerar o dump, vamos unir oque acabamos de ver nessa aula com oque aprendemos na aula anterior.
+
+Aprende MySQL direitinho, para acessar o banco de dados por php ou java mais pra frente, senão vai haver problemas.

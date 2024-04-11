@@ -1,0 +1,79 @@
+CURSO EM VIDEO BANCO DE DADOS MYSQL
+AULA 10
+
+#Criar um banco de dados no PHPAdmin
+ 
+ Clica em new na tela do lado esquerdo ou vai em base de dados, da um nome para o banco e escolhe o collation utf8_general_ci, e criar.
+
+
+#Criar tabela
+
+ Clica no banco que criamos e ele ja vai sugerir criar uma tabela, e dizendo quantas colunas vão ter, pois esta vazia.
+ Se por exemplo eu tenho: id, nome, idade. Boto o numero de colunas 3.
+
+
+#Criar colunas
+
+ Ele automaticamente vem para tela das colunas depois de criar a tabela.
+ E agora definimos os nomes das colunas e os tipos.
+
+ 
+ Vamos preencher assim:
+
+ NOME TIPO    TAMANHO/VALORES PREDEFINIDO AGRUPAMENTO(COLLATION) ATRIBUTOS  NULO INDICE  A_I COMENTARIO
+ 
+ id    int                                                                       primary (x)
+ nome  varchar 30                                                                unique
+ tel   varchar 11                                                           (x)
+ 
+
+//A_I: Significa autoincremento significa que meu id vai ser gerado automaticamente pelo sistema.
+O AutoIncrement serve para que um valor de um campo seja automaticamente inserido toda a vez que se cria um novo registro, como um ID nas chaves primárias.
+
+//nulo: Pode enviar o campo vazio se quiser.
+
+No storage engine: Podemos usar o InnoDB ou o MyISAM.
+Podemos especificar o collation denovo do lado do storage engine: utf8_general_ci.
+
+E clica em guarda.
+
+Note que aqui no PHPMyAdmin não precisamos usar códigos, apenas com cliques.
+
+Vamos ao terminal:
+
+show databases;
+
+use exemplo;
+
+show tables;
+
+desc amigos;
+
+show create table amigos;  //Aqui no console temos um comando especial para ver como o código da tabela foi feito: 
+
+show create database exemplo;
+
+E podemos renomear depois tel para telefone, e atualizar vai nos mostrar um código e podemos editar esse codigo tambem via phpadmin, muito mais simplificado.
+
+Sempre prestar atenção ao código que é gerado com as alterações.
+
+E tambem podemos gerar um codigo php desse código que geramos, na aba (criar codigo php), ja podemos copiar para jogar na nossa parte de PHP.
+
+#Podemos criar uma coluna nova tambem, depois ou no inicio ou no final.
+Estrutura:Adicionar campo(s), e adiciona uma nova coluna.
+
+#Podemos preencher por aqui tambem nossa estrutura: Inserir
+
+Na aba inserir é so ir preenchendo os dados, e executa la em baixo, inserir novo registro ou voltar atrás se não quiser mais inserir nada depois e clica na aba visualizar.
+
+#Para fazer um DUMP:
+
+Clica na aba exportar: Existe o rápido que vai exportar todos os bancos ali do lado, ou o personalizado, se queremos exportar so uma.
+Formato: SQL
+utf-8
+Sem compressão se for leve
+Marca o ADD CREATE DATA BASE  - Mesma coisa do include create schema do data export do workbench
+Desmarcamos o ADD CREATE PROCEDURE como não temos procedimentos.
+Executar, e podemos abrir com o bloco de notas, e podemos importar no workbench por exemplo.
+
+#Para excluir o banco de dados, clica na casinha > banco de dados e exclui o banco de dados desejado selecionando e clicando eliminar.

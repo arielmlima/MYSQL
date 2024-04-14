@@ -1,0 +1,315 @@
+CURSO MYSQL CURSO EM VIDEO
+AULA 14
+
+#MODELO RELACIONAL: PODEMOS TER VARIAS RELAÇÕES ENTRE DADOS, E ESSAS RELAÇÕES TEM SIGNIFICADO
+
+ O modelo relacional reina no mercado brasileiro e mundial.
+
+ Voltando aquele primeiro exemplo do container com o nome gafanhoto, que guardava todas as pessoas, e todas as informações para identificar cada um deles.
+
+ Agora vamos chamar o container que é um retangulo, de entidade. Escrito da mesma maneira gafanhoto.
+  Uma entidade no banco de dados é um container onde vamos colocar dados sobre alguma coisa ou pessoa, que vai conter dados de alunos do curso em video nesse caso.
+
+ No caso de um exemplo de container/entidade escrito produto, vamos imaginar que dentro desse container tem um monte de dados sobre esses produtos.
+ E esse monte de dados, vamos parar de chamar dados e vai se chamar atributos.
+
+ Toda entidade possui uma coleção de atribuitos definidos, esses atributos vão compor os dados, que compõe cada um dos elementos que esta dentro dessa entidade.
+
+
+ Até agora criamos duas entidades:
+             
+             atributos relacionados apenas a alunos
+
+ GAFANHOTO - id, nome, profissao, nascimento, sexo, peso, altura, nacionalidade
+
+
+          atributos relacionados apenas a cursos
+
+ CURSO  - id, nome, descrição, carga, totaulas, ano
+ 
+ 
+ Deu pra entender que não consigo pegar um aluno e colocar no container do curso? Nem vice versa? 
+ São coisas diferentes que vou guardar em containers diferentes, guardar dados diferentes.
+ 
+ A diferença entre o modelo relacional é que eu consigo fazer ligações entre essas entidades.
+
+ 
+ Lembrando do conceito de chave primária: 
+
+ Temos um identificador que não vai ter dois iguais em cada uma das entidades anteriores.
+ Não existe um gafanhoto com o mesmo id e nem dois cursos com o mesmo id 
+ Tipo um CPF, so vai existir uma pessoa com aquele dado.
+ E aqui que o modelo relacional começa a se diferenciar dos mais antigos:
+ A presença da chave primaria é muito importante para identificar as tuplas, e tambem para relacionar as entidades.
+
+ Porque assim como o nome do proprio modelo sugere, ele relaciona as entidades.
+
+ Então ao criar um modelo relacional nos perguntamos, a entidade tal pode se relacionar com a outra entidade?
+
+ 
+ Um gafanhoto pode se ligar a um curso de alguma maneira?
+
+  Sim, por exemplo um gafanhoto assiste um curso.  Representado em forma de losango
+  Gafanhoto assiste curso, curso é assistido por gafanhoto.
+
+  Existindo relação entre elas, existe uma entidade dominante e uma entidade relacionada a ela.
+  Todo losangulo vamos chamar de relacionamento.
+ 
+  Aqui nesse curso vamos apenas ao basico, falar de relacionamentos duplos, com apenas duas entidades.
+
+  Nosso grafico ta assim: 
+ 
+
+  ▬    ENTIDADE
+  ⧫    RELACIONAMENTO
+  ▬    ENTIDADE
+   
+  Oque podemos dizer desse diagrama é que a entidade sendo um retangulo e o relacionamento um losango, 
+  esse diagrama se chama:
+
+  Diagrama E-R            //Diagrama entidade relacionamento
+ 
+  Ou simplificando: DER 
+ 
+  O DER vai me mostrar como o modelo relacional esta sendo aplicado, dentro dessa situação que eu quero criar no meu banco de dados.
+  
+
+  Com o modelo simples aquele que vimos serve muito bem, quando precisar misturar dados entre tabelas tem que haver modelo relacional.
+  Vamos a um exemplo: A partir do modelo relacional dizemos que há relacionamento entre as tuplas das entidades.
+
+#MUITOS PARA MUITOS
+           n             n
+ GAFANHOTO                  CURSO
+    ▬            ⧫            ▬ 
+   THEO                     HTML 5
+                        
+   LEO                      PHP 
+                        
+   SABRINA                  JAVA
+
+   LOURDES                  WORD
+
+
+Digamos que theo assiste o curso de HTML E PHP.
+LEO HTML E WORD. 
+SABRINA JAVA.
+LOURDES HTML, PHP E WORD.
+ 
+Chegamos a conclusão que um gafanhoto assiste varios cursos, então colocamos um n ali.
+
+Sentido da leitura: Um gafanhoto assiste n cursos.
+
+E cada um dos cursos pode ser assistido por n gafanhtos, colocamos um n do outro lado.
+
+Isso se chama cardinalidade.
+
+Ela pode ser simples ou multipla (1 ou n), não vamos nos aprofundar em outros tipos agora (existe nula, min, max...)
+
+A partir da cardinalidade podemos classificar um relacionamento, esse relacionamento que vimos tem:
+
+um gafanhoto para n cursos : Cada um dos gafanhotos pode assistir n cursos
+e
+um curso para n garfanhotos: Cada um dos cursos pode ter n gafanhotos assistindo.
+
+E chamamos esse relacionamento de: MUITOS-PARA-MUITOS 
+
+#UM PARA UM
+Vamos agora a outro exemplo de relacionamento: 
+
+                         
+ MARIDO      casa com      ESPOSA
+    ▬            ⧫            ▬ 
+   THEO                     DOLORES
+                        
+   LEO                      BRUNA 
+                        
+   EDGAR                   
+
+  
+Theo é casado com dolores e Edgar com Bruna, note que Leo não tem nenhuma relação com a outra tupla, não significa que ele ta solteiro.
+Uma tupla não tem a obrigatoriedade de ter outra tupla.
+
+Um cara desse so pode se casar com uma esposa: Então escrevemos la em cima no lugar do n numero 1:
+
+                          1
+ MARIDO      casa com      ESPOSA
+    ▬            ⧫            ▬ 
+   THEO                     DOLORES
+                        
+   LEO                      BRUNA 
+                        
+   EDGAR                   
+
+E cada esposa casa apenas com um cara: Então escrevermos 1 tambem do outro lado.
+
+       1                  1
+ MARIDO      casa com      ESPOSA
+    ▬            ⧫            ▬ 
+   THEO                     DOLORES
+                        
+   LEO                      BRUNA 
+                        
+   EDGAR                
+
+Esse modelo de relacionamento se chama: UM-PARA-UM   
+
+
+#UM-PARA-MUITOS
+Mais outro exemplo de outro tipo de relacionamento:
+
+          1             n
+   PAI          cuida        FILHO
+    ▬             ⧫            ▬ 
+   THEO                     DOLORES
+                        
+   LEO                      BRUNO 
+                        
+   EDGAR                    JUNIOR
+
+
+Nesse caso o Theo vai ter um filho que é o junior
+O Leo nenhum.
+E o Edgar dois filhos Dolores e Bruno.
+
+Nesses casos vamos nos basear pelo caso maior, e dizemos que um PAI pode cuidar de n filhos. Vai o n la para cima.
+
+Um filho pode ter mais de um pai? Não, apenas um. Vai o 1 la para cima.
+
+Chamamos de relacionamento UM-PARA-MUITOS
+
+        
+E se hoje em dia aceita ter mais de um pai por filho? Usamos o modelo muitos para muitos. Mas no modelo acima foi setado daquela forma.
+
+Vimos que tem três maneiras de classificarmos nossos relacionamentos.
+UM PARA UM           1 ⧫ 1
+UM PARA MUITOS       1 ⧫ n
+MUITOS PARA MUITOS   n ⧫ n
+
+Importante demais ir botando cardinalidade nas nossas entidades, que ai vamos ver uma regrinha bem básica que é o modelo principal de modelo relacional.
+Podemos fazer isso mentalmente, apenas ao exercitar:
+
+Exemplo:
+
+
+     n       n
+       compra
+Cliente   ⧫   Produto
+
+
+O cliente pode comprar n produtos.
+O produto pode ser comprado por n clientes.
+Muitos-Para-Muitos.
+
+
+Vamos avançando, entendemos que as entidades se relacionam, que posso ter tuplas ligadas a varias ou a um ou nenhuma tupla do outro lado, e criando esse relacionamento.
+
+E isso na prática? Como fazemos uma ligação entre uma entidade e outra?
+
+Ai temos que lembrar o conceito de chaves, que vimos no inicio dessa aula. (Chave Primária: Atributo especifico que identifique as tuplas como unicas)
+
+E a chave estrangeira? 
+De um lado do mundo eu tenho uma entidade x e do outro lado do mundo outra entidade y, as duas tem suas chaves primarias.
+ E para relacionar uma entidade e outra como eu faço? Relações teóricas na forma pratica nada mais são do que uma troca de chaves.
+
+Pegar a chave de um jogar pro outro, a chave do outro e jogar pro um. 
+
+Digamos que tenho que relacionar a entidade x e a entidade y, fizemos uma copia da chave de x la para entidade y, a chave primaria de x que veio para y chamamos de chave estrangeira.
+
+E oque vem de um lugar pro outro é oque? Estrangeiro.
+
+Chave estrangeira é a chave primaria de um lugar que veio para outro lugar. 
+
+Existem tecnicas e regras para fazer isso:
+
+-Sem chave primária não existem relações.
+-E para você jogar a chave de um lado para o outro vai depender da classificação do relacionamento.
+
+#Exemplo 1 que ja vimos antes: Regra de relacionamentos um para um
+       1    ⧫    1
+ Marido  casa com  Esposa
+
+E quando tiver essas tabelas 1 para 1 você vai se perguntar sera que da para juntar essas tabelas em uma só?
+Se a resposta for sim junta, senão deixa separado.
+
+Temos que ver se faz sentido manter esses dados separados, 
+e nesse caso faz todo sentido pois cada um é uma pessoa, e cada um é uma vida, apesar de se relacionarem e serem casados.
+Elas são separadas, não nasceram juntas. Certo, deixo separado e faço oque?
+
+Vamos botar os atributos de Marido: Marido tem cpf,nome, nascimento, nacionalidade.
+E os atributos da Esposa: cpf, nome, nascimento, nacionalidade.
+
+Note que o cpf de marido é uma chave primaria e a da esposa é uma chave primaria tambem.
+
+Ai vamos escolher a entidade Dominante: Marido, geralmente representadas no lado esquerdo.
+Oque a regra diz?
+
+Pegamos a chave primária(cpf) da esposa e transfira para marido colocando ele como chave estrangeira.
+
+
+Oque fizemos: Decidimos que marido era a entidade dominante, e transferimos a chave de esposa para marido.
+
+O nome da chave estrangeira não precisa ser o mesmo da chave original (cpf-esposa) mas os dados precisam ser compativeis. ( se for varchar o outro tem que ser tambem, se for inteiro tem que ser inteiro a chave estrangeira.)
+
+
+#Exemplo 2: Regra de relacionamentos um para muitos
+
+   1    ⧫   n
+PAI   cuida  FILHO
+
+
+Pai atributos: cpf(chaveprimaria), nome, cargo, especialidade
+
+Filho atributos: id(chaveprimaria), nome, nascimento, nacionalidade                   //O filho ainda não tem cpf pois muito criança
+
+A regra no relacionamento um para muitos é o seguinte:
+
+Você pega a chave primária do lado um e joga no lado muitos como chave estrangeira.
+
+E apenas isso, mais nada.
+
+No exemplo acima: Pega o cpf do pai e transfere pro filho como chave estrangeira, novamente não precisa ter o mesmo nome, so ser compativel.
+
+Próxima aulas vamos definir uma chave estrangeira na prática, que são a base dos relacionamentos.
+
+
+#Exemplo 3: Muitos para muitos
+
+     n       n
+       compra
+Cliente   ⧫   Produto
+
+Cliente atributos: cpf(chaveprimaria), nome, endereco, telefone
+
+Produto atributos: cod-prod(chaveprimaria), nome, fabricante, preço 
+
+A regra é simples: 
+
+O relacionamento compra virou uma entidade, o losangulo fica dentro do retangulo, e ele tem seus proprios atributos agora.
+Note que os n ficam mais perto da nova entidade compra, e surgem dois mini relacionamentos entre as entidades.
+   1        n   n      1
+ ▬       ⧫    ▬    ⧫      ▬  
+cliente     compra    produto
+
+E referente a cardinalidade não precisamos nem pensar botamos 1 em cliente e 1 em produto.
+
+Compra atributos: id-compra, data, forma-pagto
+
+Note que no grafico fica dois relacionamentos um para muitos. 
+
+E qual a regra de relacionamentos um para muitos?
+A chave do lado do muitos vai para o lado do um como chave estrangeira.
+
+
+   1        n   n      1
+ ▬       ⧫    ▬    ⧫      ▬  
+cliente     compra    produto
+  '           ^^         '
+  '-----------''---------'
+
+A entidade compra agora vai possuir alem da sua propria chave identificadora, duas outras chaves estrageiras. Uma que veio de cliente(cpf) outra veio de produto(cod-prod).
+
+Como ficou nossos atributos em compra:  Compra atributos: id-compra, data, forma-pagto, cpf-cliente, cod-prod
+
+O código do cliente virou chave estrangeira e a chave do produto virou chave estrangeira.
+
+Então a regra é desmembrar esse relacionamento de muitos para muitos em varios relacionamentos de um para muitos.

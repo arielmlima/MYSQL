@@ -1,0 +1,107 @@
+CURSO EM VIDEO MYSQL
+AULA 16 
+
+Agora vamos ver na pratica como trabalhamos com a ideia do relacionamento de muitos para muitos.
+
+Exemplo:
+          1   n       n    1
+ gafanhoto     assiste      curso
+
+atributos gafanhoto: id, nome, sexo, nascimento.
+atributos curso: idcurso, nome, descricao, aulas
+atributos assiste: id, data, idgafanhoto, idcurso #Note que idgafanhoto, e idcurso foram transferidas das outras entidades para cá.
+
+Nesse caso o gafanhoto pode assistir a varios cursos.
+E o mesmo curso pode ser assistido por varios gafanhotos.
+
+#Lembra que nesse caso o losango fica dentro do retangulo, criando uma nova entidade, trazendo os n para si, criando mini relações, e com a cardionalidade 1 do lado do gafanhoto e 1 do lado do curso.
+#Gerando dois relacionamentos um para muitos.
+
+Exemplo:
+
+create table gafanhoto_assiste_curso (
+ id int not null auto_increment, 
+ data date, 
+ idgafanhoto int,
+ idcurso int, 
+ primary key (id),                                         #Definindo a chave primaria
+ foreign key (idgafanhoto) references gafanhotos(id),      #Definindo a chave estrangeira e a referencia
+ foreign key (idcurso) references curso(idcurso)          #Definindo a outra chave estrangeira e a refencia
+ )default charset = utf8mb4;
+
+#Entendendo a relação 
+
+Criamos um quadradinho preto(Uma instancia), dentro dele um idenficador do gafanhoto e o identificador do curso, criando nossa relação dizendo que este gafanhoto vai assistir o curso de HTML5
+Criamos outro quadradinho preto logo abaixo, e vamos fazer ele assistir o curso de word. Criamos outra ligação.
+O primeiro gafanhoto esta assistindo dois cursos, HTML5 e Word.
+
+Agora godofredo, criamos abaixo outro quadradinho preto que vai se relacionar com HTML5.
+E criamos outro abaixo que vai se relacionar com php... Segue o exemplo em anagrama:
+
+Exemplo visual: 
+          1    n       n          1
+ gafanhoto      assiste            curso
+ 
+ jose ----------->■ --------> -----> HTML5 <- 
+              '-->■-----      '  --->PHP    '  <-    
+                       '      ' '
+ godofredo ------>■-    '---->' '    Word   '   '   <-
+               '   '----------' '
+               '->■-------------'           '   '    '
+
+ dolores------>   ■-------------------------'   '    '
+         '----->  ■------------------------------    '
+            '-->  ■ ----------------------------------
+
+Logo, jose ta assitndo dois cursos. (html, word)
+godofredo dois cursos tambem. (html, php)
+dolores tres cursos. (html, php, word)
+
+
+#Como inserir os registros
+
+insert into gafanhoto_assiste_curso values
+(default, '2014-03-01', '1', '2')    #Id default vai gerar meu id automaticamente do (gafanhoto_assiste-curso) e depois diz que no dia primeiro de março de 2014 o Gafanhoto 1 começou a assistir o curso 2.
+
+
+
+select * from gafanhoto_assiste_curso; #Confere se ta tudo certo
+
+
+Agora vamos cadastrar mais umas pessoas manualmente, clicando e inserindo os registros nos campos id, data, idgafanhoto, idcurso, e criando mais tres tuplas.
+
+Agora damos o select, so aparecem os numero, quero o nome do cara tambem que ta na tabela gafanhotos. Lembra na aula passada sobre junções que usamos o JOIN? 
+
+#Junções vamos usar o inner JOIN e ON denovo.
+
+ select * from gafanhotos g          #Botei g como apelido
+ join gafanhoto_assiste_curso a      #Juntando a tabela gafanhotos com o resultado do assiste
+ on g.id = a.idgafanhoto;            #//Precisa do on para dar tudo certo, on id do gafanhoto igual ao id gafanhoto da tabela a. 
+
+ #Exemplo 2: Mostrar so as informações que queremos.
+
+ select g.id, g.nome, a.idgafanhoto from gafanhotos g  
+ join gafanhoto_assiste_curso a              
+ on g.id = a.idgafanhoto;     
+
+#Exemplo 3:                
+ 
+ select g.nome, a.idcurso from gafanhotos g  
+ join gafanhoto_assiste_curso a              
+ on g.id = a.idgafanhoto
+ order by g.nome ;  
+
+#Exemplo 4: Não quero so o código do curso quero o nome do curso, que ta la na outra tabela cursos, e vamos usar a tabela cursos como? Outro JOIN.
+#Assim conseguimos puxar dados de três tabelas.
+
+ select g.nome, a.idcurso, c.nome from gafanhotos g  
+ join gafanhoto_assiste_curso a              
+ on g.id = a.idgafanhoto
+ join cursos c
+ on a.idcurso = c.idcurso;
+
+
+
+
+
+

@@ -42,7 +42,6 @@ D   - Durabilidade (A transação tem que durar o tempo que for necessário, o d
 
 Principios fundamentais para criação de tabelas.
 
-
 Caso eu não coloque uma engine, por padrão o MySQL considera a InnoDB.
 
 O innoDB tem duas funcionalidades:
@@ -97,14 +96,87 @@ alter table gafanhotos           #Agora precisamos dizer que esse campo é uma c
 add foreign key (cursopreferido)
 references cursos(idcurso);     #Fazendo a referencia no final a cursos e dentro do parenteses a chave primaria original. Significa que o cursopreferido da tabela garfanhotos esta ligado a idcurso
 
+Note que quando damos describe denovo, no final da lista vai estar o cursopreferido com a key escrito MUL (multipla), sendo uma chave multipla, nesse caso tambem sendo uma chave estrangeira.
+
+
+select * from gafanhotos;              //Para selecionar tudo da nossa entidade gafanhotos e vermos o id de cada tupla
+select * from cursos;                  //Para selecionar tudo da nossa entidade curso e vermos o id de cada tupla
+
 #Agora vamos registrar os cursos preferidos de cada aluno
 
-select * from gafanhotos;
-select * from cursos;
+update gafanhotos set cursopreferido = '6' where id = '1';   //Note que o aluno id 1 é o daniel
+
+
+#E para fazer mais rapido essa parte? Podemos fazer no proprpio mouse clicando em cima do curso preferido de cada um e editando.
+
+#Tem que clicar no Apply para funcionar.
+
+ 
+#Integridade Referencial: Não consigo modificar um campo, se ele for afetar minha transação, se começar a rolar inconsistencia ele não vai deixar acontecer.
+
+Vamos tentar apagar o curso de MySQL: Note que vai dar erro: constraint fails key, um erro de integridade referencial.
+
+ delete from cursos 
+ where idcurso = '6'; 
+
+#Da mesma forma que se tentarmos apagar/alterar qualquer estrutua do curso de html5, não vai dar certo, pois ja existe a relação entre o garfanhoto e esse curso. Senão ia se perder o relacionamento entre eles.
+
+Note que se eu apagar o curso de PHP que ninguem preferiu, vai rolar sem problema pois não tem relação nenhuma com ninguem.
+
+ No MYSQL:
+
+ delete from cursos 
+ where idcurso = '28';     #Vamos conseguir apagar sem problemas pois não tem relação com nada.
+
+
+#JUNÇÃO: Como eu faço para juntar a tabela cursos e a tabela gafanhotos? JOIN e ON
+
+
+ select gafanhotos.nome, cursos.nome, cursos.ano  #E assim conseguimos juntar as informações das duas entidades Ex: entidade.atributodatupla
+ from gafanhotos join cursos
+ on cursos.idcurso = gafanhotos.cursopreferido  #Para funcionar e fazer a ligação da chave primaria e a chave estrangeira.
+ order by gafanhotos.nome; #Para ordenar por ordem alfabetica
+
+#O Join que usamos é o inner join mas podemos escrever so join nesse caso. - Vai somente fazer com quais tem as ligações. Vendo oque tem de relação entre as duas tabelas.
+
+
+#Trabalhando com apelidos de colunas: AS  #Diminuindo o código: Só não simplificar na linha que ta o from, as, join, que é onde vamos especificar isso.
+
+ select g.nome, c.nome, c.ano  
+ from gafanhotos as g inner join cursos as c             #sempre que for me referir a gafanhotos uso g e cursos c
+ on c.idcurso = g.cursopreferido  
+ order by g.nome;
+
+
+Vamos a outro exemplo, so que a mesma ideia do gafanhoto e cursos.
+
+Agora vamos ter um novo gafanhoto que não vai preferir curso nenhum. (cledimilson)
+
+E temos dois cursos não preferidos por ninguem. (php e java)
+
+O inner join vai pegar a área do meio da relação(losango) e fazer essa relação com todas as linhas que apontam de um gafanhoto para um curso, onde se relacionam. Essas linhas tem cores diferentes.
+Exibindo somente os que tem relação.
+
+E temos o Outer join que vai tratar os conceitos do inner, junto dos dados que não tem relação nenhuma com nada.
+Exibindo os dados com relação, e sem relação. 
+
+#OUTER JOIN: Mostrar todos os gafanhotos mesmo os que não preferem nada:
+
+
+ select g.nome, c.nome, c.ano  
+ from gafanhotos as g left outer join cursos as c        #Note que oque ta do lado esquerdo de join é gafanhotos, e o do lado direito cursos.  Se quisermos dizer quem é o prefencial bota um left (esquerda), ou right (direita) antes do join. 
+ on c.idcurso = g.cursopreferido;
+
+ /*Podemos simplificar tirando o outer, que ele ja vai entender que é um outer so de ter left ou right.
+ Quando mostrar o left, mostrou todos os gafanhotos até de quem não tem curso preferido.  
+ Se mostramos o right nesse caso o lado direito (cursos) vai ter a preferencia, exibindo todos os cursos até os não preferidos e com repetições exibindo oque vimos antes: um mesmo curso é preferido por pessoas diferentes. Note que temos varios null nos campos g.nome pois não tem relação com os cursos exibidos, mas mesmo assim é exibido por ser outer.
+ */
 
 
 
 
+
+            
 
 
 

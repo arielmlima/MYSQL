@@ -1,0 +1,120 @@
+AULA 15 CURSO BANCO DE DADOS
+CURSO EM VIDEO
+
+
+Quando criamos uma tabela no SQL temos que escolher uma coisa chamada ENGINE, que é a maquina que vai poder criar registros.
+
+Vamos abrir o código do dump para visualizar:
+
+ CREATE TABLE `gafanhotos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(30) NOT NULL,
+  `profissao` varchar(20) DEFAULT NULL,
+  `nascimento` date DEFAULT NULL,
+  `sexo` enum('M','F') DEFAULT NULL,
+  `peso` decimal(5,2) DEFAULT NULL,
+  `altura` decimal(3,2) DEFAULT NULL,
+  `nacionalidade` varchar(20) DEFAULT 'Brasil',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+
+
+
+No final do comando temos uma engine=InnoDB, por padrão. 
+
+InnoDB é uma engine, uma máquina de criação de tabelas, ele é um mecanismo que pertence a oracle hoje em dia.
+
+A principal caracteristica dessa engine é suportar chaves estrangeiras.
+
+Para suportar as chaves estrangeiras vou usar o innoDB.     //Existe a MyISAM(Mais antigo) e XtraDB que são engines tambem.
+
+A innoDB e a XtraDB suportam o ACID, que são as 4 principais regras de uma boa transação:
+
+  Transação é tudo aquilo que podemos pedir ao banco de dados e ele executar e te dar uma resposta, é considerado uma transação.
+  Ou seja, toda ação que o banco de dados possa executar.
+
+E uma transação para acontecer tem que seguir as 4 principais regras:
+
+A   - Atomicidade   (Não pode ser dividida em subtarefas, toda tarefa é feita ou nada é considerado). Ou tudo acontece ou nada é considerado.
+C   - Consistencia (Um banco de dados que estava OK depois da transação ele tem que estar OK, e se correr inconsistencias tudo é desfeito pro estado anterior) 
+I   - Isolamento (Tenho duas transações acontecendo em paralelo, uma não vai influenciar na outra, elas devem acontecer de forma isolada, não pode afetar a outra).
+D   - Durabilidade (A transação tem que durar o tempo que for necessário, o dado tem que ser durável enquanto eu precisar desse dado)
+
+Principios fundamentais para criação de tabelas.
+
+
+Caso eu não coloque uma engine, por padrão o MySQL considera a InnoDB.
+
+O innoDB tem duas funcionalidades:
+
+1-Permitir a compatibilidade, e o uso de chaves estrangeiras, garantindo a integridade referencial.
+2-Permite a compatibilidade com os 4 principios fundamentais da criação de tabelas(ACID).
+
+#Um para muitos, Voltando ao exemplo da aula passada:
+         n     ⧫     1
+GAFANHOTO   prefere   CURSO
+
+teo                   html
+leo                   php
+laura                 word
+
+
+atributos gafanhoto: id, nome, profissao, nascimento, sexo, peso, altura, nacionalidade;
+atributos curso: idcurso, nome, descricao, carga, totaulas, ano;
+
+teo prefere o curso de word
+leo prefere o curso de html
+laura prefere o curso de html
+
+Note nesse momento que ninguem preferiu o curso de php, onde nada se relacionou com aquela tupla.
+Todas as outras tuplas interagiram.
+
+
+Nesse caso o garfanhoto decidindo qual seu curso preferido, so pode escolher um, vai um la para cima do lado direito.
+E o mesmo curso foi preferido por n gafanhotos, mais de um gafanhoto prefere algum tipo de curso (html). Vai o n pro lado esquerdo.
+
+
+Esse caso é um relacionamento um para muitos.
+
+#E como fazemos transferencia de chave no um para muitos? 
+
+Pegar a chave primaria do lado 1 e trazer para o lado muitos!
+
+Ela não precisa ter o mesmo nome, so o mesmo tipo e mesmo tamanho.
+
+Vamos ao MySQL:
+
+use cadastro;
+describe gafanhotos;
+
+#Adicionando a foreign key
+
+alter table gafanhotos
+add column cursopreferido int;         #Pegamos a chave primaria de cursos e demos o nome de cursopreferido e declamaros o tipo na sequencia int.
+
+
+alter table gafanhotos           #Agora precisamos dizer que esse campo é uma chave estrangeira, vamos dar outro alter table.
+add foreign key (cursopreferido)
+references cursos(idcurso);     #Fazendo a referencia no final a cursos e dentro do parenteses a chave primaria original. Significa que o cursopreferido da tabela garfanhotos esta ligado a idcurso
+
+#Agora vamos registrar os cursos preferidos de cada aluno
+
+select * from gafanhotos;
+select * from cursos;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
